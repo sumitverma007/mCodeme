@@ -9,8 +9,8 @@ meme type
 {% endblock css %}
 
 {% block body %}
-<div class="container bg-light py-3 border rounded">
-    <h1 class="display-4 text-danger text-center">{{obj.mem_tag}}</h1>
+<div class="container-fluid bg-secondary py-3 border rounded">
+    <h1 class="display-4 text-light text-center">{{obj.mem_tag}}</h1>
 
 </div>
 
@@ -18,7 +18,7 @@ meme type
     <a href="/meme/{{obj.mem_tag}}/" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i></a>
     <div class="row">
         <div class="col-md-6 d-flex justify-content-center">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 25rem;">
                 <img src="/media/{{obj.mem_img}}/" height="375" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{obj.mem_tag}}</h5>
@@ -35,9 +35,9 @@ meme type
             <input type="hidden" name="postId" value="{{obj.mem_id}}">
             <input type="hidden" name="Parentsno" value="">
            
-            <input type="text" class="form-control mr-sm-2" name="comment" id="comment" placeholder="Enter Your Comment here" required>
+            <input type="text" style="width:300px;height:50px;" class="form-control mr-sm-2" name="comment" id="comment" placeholder="Enter Your Comment here" required>
     
-            <button type="submit" class="btn btn-success" value="submit"><i class="fa fa-chevron-circle-right"></i></button>
+            <button type="submit" style="height:50px;" class="btn btn-outline-primary" value="submit"><i class="fa fa-chevron-circle-right"></i></button>
        
     </form>
             {% endif %}
