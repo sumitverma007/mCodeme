@@ -3,8 +3,13 @@
 meme type
 {% endblock title %}
 {% block css %}
+{% load humanize %}
+{% load extras %}
 .cmntbox{
-    border-radius:55px;
+    border-radius:8px;
+}
+.card{
+    height:27rem;
 }
 {% endblock css %}
 
@@ -31,7 +36,7 @@ meme type
             <p class="text-danger">Please <button type="button" class="btn btn-sm btn-primary mx-2" data-toggle="modal" data-target="#loginmodel">Log in</button> to Comment</p>
             {% else %}
              <h3>Post a Reply:</h3>
-        <form  class="form-inline md-form mr-auto" action="#" method="POST">{% csrf_token %}
+        <form  class="form-inline md-form mr-auto" action="/meme/postComment/" method="POST">{% csrf_token %}
             <input type="hidden" name="postId" value="{{obj.mem_id}}">
             <input type="hidden" name="Parentsno" value="">
            
@@ -42,14 +47,46 @@ meme type
     </form>
             {% endif %}
          <h4 class="my-2">Comments:</h4>    
-  <div class="media border p-3  my-2 bg-dark text-light cmntbox">
-  <img src="/static/img/user.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:30px;height:30px;">
-  <div class="media-body">
-    <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
-    <p>Lorem ipsum...</p>
+         {% for i in comments %}
+  <div class="media  p-3  my-2 cmntbox bg-secondary">
+  <img src="/static/img/user.png" alt="John Doe" class="mr-3 mt-3 border rounded-circle" style="width:30px;height:30px;">
+  <div class="media-body cmntbox border bg-dark text-light p-2 ">
+    <h4>{{i.user}} <small><span class="badge badge-warning ml-2">{{i.timestamp|naturaltime}}</span></small></h4>
+    <p>{{i.comment}}</p>
+        <!-- Place for reply -->
+        <button class="btn btn-warning btn-sm mb-2"  type="button" data-toggle="collapse" data-target="#reply{{i.sno}}" aria-expanded="false" aria-controls="collapseExample">
+            Reply <i class="fa fa-chevron-circle-right"></i>
+          </button>
+          <div class="collapse" id="reply{{i.sno}}">
+            <!-- <div class="card card-body"> -->
+                <!-- place for comment shit -->
+                {% if user.is_authenticated %}
+                <form  class="form-inline md-form mr-auto" action="/meme/postComment/" method="POST">{% csrf_token %}
+                    <input type="hidden" name="Parentsno" value="{{i.sno}}">
+                    <input type="hidden" name="postId" value="{{obj.mem_id}}">
+                   
+                    <input type="text" class="form-control mr-sm-2" name="comment" id="comment" placeholder="Reply Here.." required>
+            
+                    <button type="submit" class="btn btn-warning" value="submit"><i class="fa fa-chevron-circle-right"></i></button>
+               
+            </form>
+            {% else %}
+               <p  class="text-danger">Please Login to Post a reply</p>
+               {% endif %}
+               </div>
+               {% for i in repDict|get_val:i.sno %}
+               <div class="media  p-3  my-2 cmntbox bg-secondary">
+                <img src="/static/img/user.png" alt="John Doe" class="mr-3 mt-3 border rounded-circle" style="width:30px;height:30px;">
+                <div class="media-body cmntbox border bg-dark text-light p-2 ">
+                  <h4>{{i.user}} <small><span class="badge badge-warning ml-2">{{i.timestamp|naturaltime}}</span></small></h4>
+                  <p>{{i.comment}}</p>
+                  </div>
+                  </div>
+           {% endfor %}
+
   </div>
 </div>
-            
+            {% endfor %}
         </div>
     </div>
 </div>

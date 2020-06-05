@@ -3,13 +3,20 @@
 {% block title %}
 {{slug}}
 {% endblock title %}
+{% block css %}
+.jumbotron{
+    margin-bottom:0;
+    margin-top:0;
+    padding:0;
 
+}
+{% endblock %}
 {% block body %}
 <main role="main">
 
   <section class="jumbotron text-center">
     <div class="container">
-      <h1>{{slug}}</h1>
+      <h1 class="display-4">{{slug}}</h1>
       
     </div>
   </section>

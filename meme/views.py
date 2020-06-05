@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
-from .models import memobj
-
+from .models import memobj,memeComment
+from meme.templatetags import extras
 # Create your views here.
 def memehome(request):
     allobj=memobj.objects.all()
@@ -18,9 +18,10 @@ def memehome(request):
 def memetag(request,slug):
 
     myobj=memobj.objects.filter(mem_tag=slug)
+
     if len(myobj)>0:
         
-        return render(request,"meme/memdet.html",{'tagname':myobj,'slug':slug})
+        return render(request,"meme/memdet.html",{'tagname':reversed(myobj),'slug':slug})
     else:
         return redirect('memehome')    
     return redirect('memehome')
@@ -29,8 +30,38 @@ def memetag(request,slug):
 def memdetail(request,slug,id):
     try:
         obj=memobj.objects.get(mem_id=id)
-        return render(request,'meme/prodlanding.html',{'obj':obj})
+        cmnt=memeComment.objects.filter(memepost=obj,parent=None)
+        replies=memeComment.objects.filter(memepost=obj).exclude(parent=None)
+        repDict={}
+        for reply in replies:
+            if not reply.parent.sno in repDict.keys():
+                repDict[reply.parent.sno]=[]
+                repDict[reply.parent.sno]=[reply]
+            else:
+                repDict[reply.parent.sno].append(reply)    
+        
+        return render(request,'meme/prodlanding.html',{'obj':obj,'comments':cmnt,'repDict':repDict})
     except Exception as e:
         return redirect("/")
     return redirect("/")
     # return HttpResponse(f"id is {id}")    
+
+def postComment(request):
+    if request.method=="POST":
+        comment=request.POST.get('comment')
+        user=request.user
+        memid=request.POST.get('postId')
+        memno=memobj.objects.get(mem_id=memid)
+        parentno=request.POST.get('Parentsno')
+        if parentno=="":
+            #parent comment
+            cmnt=memeComment(comment=comment,user=user,memepost=memno)
+            cmnt.save()
+            return redirect(f'/meme/{memno.mem_tag}/{memid}')
+        else:
+            parent=memeComment.objects.get(sno=parentno)
+            cmnt=memeComment(comment=comment,user=user,memepost=memno,parent=parent)
+            cmnt.save()
+            return redirect(f'/meme/{memno.mem_tag}/{memid}')
+        
+    return HttpResponse("Post Comment Page")    

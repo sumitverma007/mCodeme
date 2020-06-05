@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'meme.apps.MemeConfig',
     'problem.apps.ProblemConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
