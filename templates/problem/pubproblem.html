@@ -1,0 +1,75 @@
+{% extends 'basic.html' %}
+{% block title %}
+Publish Problem
+{% endblock title %}
+{% block body %}
+<div class="container bg-light">
+<h2>Author: {{request.user}}</h2>
+</div>
+
+
+
+<div class="container my-2">
+<form action="/problem/handlepubpage/" method='POST' >{% csrf_token %}
+  <div class ="form-group">
+      <label for="tags"><b>Choose the optimal Tag</b></label><br>
+      {% for i in tags %}
+      <label class="radio-inline mx-2"><div class="form-check">
+        <input class="form-check-input" type="radio" name="tags" id="tags{{i}}" value="{{i}}">
+        <label class="form-check-label" for="tags{{i}}">
+          {{i}}
+        </label>
+      </div>
+    </label>
+      {% endfor %}
+  </div>
+  
+     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addtag" aria-expanded="false" aria-controls="collapseExample">
+      Add New Tag..
+    </button>
+  
+  <div class="collapse my-2" id="addtag">
+    
+        <div class="form-group">
+           <input type="text" class="form-control" id="newtag" name="newtag"  placeholder="For ex: Dynamic Programming">
+         </div>
+  </div>
+  <div class="form-group my-2">
+    <label for="pname">Problem Name</label>
+    <input type="text" class="form-control" id="pname" name="pname" placeholder="Enter Problem Name" required>
+    
+  </div>
+  <div class="form-group">
+    <label for="pdesc">Problem Statement</label>
+    <textarea class="form-control" id="pdesc" name="pdesc" rows="8" required></textarea>
+  </div>
+  <div class="form-group my-2">
+    <label for="pin">Input Format</label>
+    <textarea rows="3" class="form-control" id="pin" name="pin" required></textarea>
+  </div>
+  <div class="form-group my-2">
+    <label for="pout">Output Format</label>
+    <textarea rows="3" class="form-control" id="pout" name="pout" required></textarea>
+  </div>
+  <div class="form-group my-2">
+    <label for="pconst">Constraint</label>
+    <textarea rows="3" class="form-control" id="pconst" name="pconst" required></textarea>
+  </div>
+  <div class="form-group my-2">
+    <label for="pexin">Example Input</label>
+    <textarea rows="3" class="form-control" id="pexin" name="pexin" required></textarea>
+  </div>
+  <div class="form-group my-2">
+    <label for="pexout">Example Output</label>
+    <textarea rows="3" class="form-control" id="pexout" name="pexout" required></textarea>
+  </div>
+  <div class="form-group my-2">
+    <label for="pcode">Enter Code</label>
+    <textarea rows="15" class="form-control" id="pcode" name="pcode" required></textarea>
+  </div>
+
+ <button type="submit" class="btn btn-primary my-3">Submit</button></textarea>
+</form>
+</div>
+
+{% endblock body %}

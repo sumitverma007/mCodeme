@@ -1,6 +1,6 @@
 {% extends 'basic.html' %}
 {% block title %}
-meme type
+{{obj.mem_tag}}-{{obj.mem_id}}
 {% endblock title %}
 {% block css %}
 {% load humanize %}
@@ -46,9 +46,9 @@ meme type
        
     </form>
             {% endif %}
-         <h4 class="my-2">Comments:</h4>    
+         <h4 class="my-2">Comments:({{comments|length}})</h4>    
          {% for i in comments %}
-  <div class="media  p-3  my-2 cmntbox bg-secondary">
+  <div class="media  p-3  my-2 cmntbox">
   <img src="/static/img/user.png" alt="John Doe" class="mr-3 mt-3 border rounded-circle" style="width:30px;height:30px;">
   <div class="media-body cmntbox border bg-dark text-light p-2 ">
     <h4>{{i.user}} <small><span class="badge badge-warning ml-2">{{i.timestamp|naturaltime}}</span></small></h4>

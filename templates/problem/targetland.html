@@ -1,0 +1,50 @@
+{% extends 'basic.html' %}
+{% load humanize %}
+{% block title %}
+Listed Problems
+{% endblock title %}
+{% block css %}
+.fc{
+    display: block;
+  width: 100%;
+  border: none;
+  padding: 14px 28px;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight:bolder;
+  text-align: center;
+}
+.jumbotron{
+    margin-bottom:0;
+    margin-top:0;
+    padding:0;
+
+}
+{% endblock css %}
+{% block body %}
+{% comment %} 
+{% if user.is_authenticated %}
+<div class="container">
+<a href="/problem/publishpage/" class="btn btn-success" type="button">Publish Now</a>
+</div>
+{% endif %} {% endcomment %}
+<div class="container">
+<div class="jumbotron text-center">
+  <h1 class="display-4">{{tag}}</h1>
+</div>
+ <a href="/problem/problemtags/" class="btn btn-warning btn-sm  "><i class="fa fa-arrow-circle-left"></i> <strong>Return to Problem Home</strong></a>
+{% for i in allprob %}
+<div class="card p-2 my-2 bg-light">
+<strong class="d-inline-block mb-2 text-primary">{{i.p_tag}}</strong>
+<h3 class="mb-0"><a class="text-dark" href="#">{{i.p_name}}</a></h3>
+<div class="mb-1 text-muted"><i>Author :</i> {{i.p_user.username}}  <span class="badge badge-danger mx-3">{{i.p_timestamp|naturaltime}}</span></div>
+<p class="card-text mb-auto"><b>{{i.p_desc|slice:":200"}}....</b></p>
+<div>
+<a href="/problem/problemtags/tag/{{i.p_id}}/" class="btn btn-success btn-sm  my-2">Continue reading  <i class="fa fa-chevron-circle-right"></i></a>
+</div>
+</div>
+
+{% endfor %}
+</div>
+
+{% endblock body %}
