@@ -1,4 +1,10 @@
 {% extends 'basic.html' %}
+{% block css %}
+.tagta{
+  
+    height: 240px;
+}
+{% endblock css %}
 {% block body %}
 
 <main role="main">
@@ -16,7 +22,7 @@
       <div class="row">
        {% for i in tagname %}
         <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
+          <div class="card mb-4 shadow-sm tagta">
            
             <div class="card-body">
              <div class="card-title">

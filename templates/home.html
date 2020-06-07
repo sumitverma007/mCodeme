@@ -1,7 +1,12 @@
 {% extends "basic.html" %}
 {% block title %}Home  
 {% endblock title %}  
-
+{% block css %}
+.tagheight{
+  
+    height: 251px;
+}
+{% endblock css %}
 {% block currenthome %}
 active
 {% endblock currenthome %}
@@ -39,7 +44,30 @@ active
      <p class="lead">We compiled the list of classic coding problems and arranged them according to their tags.Feel Free to Explore this section.</p>
     
     <hr class="my-2">
-    
+    <div class="row">
+       {% for i in unique %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm tagheight">
+           
+            <div class="card-body">
+             <div class="card-title">
+               <strong class="d-inline-block mb-2 display-4 text-primary">{{i}}</strong>
+             </div>
+              <div class="d-flex justify-content-between align-items-center">
+                
+                  <a href="/problem/problemtags/{{i}}/" class="btn btn-sm btn-success"><strong>Explore</strong>  </strong><i class="fa fa-chevron-circle-right"></i></a>
+                   
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      
+      
+       {% endfor %}
+ </div>
+  
     <p class="lead">
     
         <a class="btn btn-primary btn-lg mr-2 mt-2" href="/problem/problemtags/" role="button"> Sorted By Tags  <i class="fa fa-chevron-circle-right"></i> </a>

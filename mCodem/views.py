@@ -2,10 +2,16 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from problem.models import probobj
 # Create your views here.
 def index(request):
     # return HttpResponse("Home Shit Man")
-    return render(request,"home.html")
+    allobj=probobj.objects.all()
+    unique_tags={i.p_tag for i in allobj}
+    while len(unique_tags)>3:
+        unique_tags.pop()
+        
+    return render(request,"home.html",{'unique':unique_tags})
 
 def handleLogin(request):
     if request.method=="POST":

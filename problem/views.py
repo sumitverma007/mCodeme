@@ -41,6 +41,7 @@ def showtags(request,tagname):
     return redirect("/problem/")  
 def probdetails(request,id):
     targetobj=probobj.objects.get(p_id=id)
+    
     return render(request,"problem/probdetail.html",{'obj':targetobj})
     # return HttpResponse(f"Gettin ready for product no {id}")    
 

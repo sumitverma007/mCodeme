@@ -1,0 +1,32 @@
+# mCodeme:a place where you can search the classic problems sorted by tags and along with the famous
+          memes from reddit.
+------------------------------------------------------------------------------------------------------
+#installation Guide
+-------------------------------------------------------------------------------------------------------
+#1.Open Terminal and change your directory to mCodeme folder.It'll look like "C://Users/.../mCodeme/".
+  How to change Directory:- "https://www.digitalcitizen.life/command-prompt-how-use-basic-commands"
+
+#2.Now make sure you're at right directory ,to check this type "ls" without  qoute and check if there
+   is "manage.py" file.If this file is present then you're at right directory.
+
+#3.Make sure that python interpreter is installed in your machine.To check write "python --version"
+    or "python3 --version" without quote ,if it says unknown command then install python 
+    "https://www.python.org/downloads/".
+
+#4.Now make sure if pip command is working correctly.Type "pip --version" to check, if it says
+   unknown command then install pip "https://phoenixnap.com/kb/install-pip-windows"
+
+#5.Now you're ready to go.Type "pip install -r requirements.txt" without quotes.It'll install
+   the packages in your system.
+
+#6.After Successfull installation Type "python manage.py runserver" without qoutes.
+
+#7.Now open your web Browser (Chrome for better view) and type url:"127.0.0.1:8000" without quote and 
+   press Enter.
+
+------------------------------------------------------------------------------------------------------
+Feel Free to contact me any time if there is any problem .My mail: sumitvermavcs@gmail.com
+------------------------------------------------------------------------------------------------------
+
+                                           <Happy Coding>
+
