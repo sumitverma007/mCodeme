@@ -3,7 +3,6 @@ asgiref==3.2.7
 distlib==0.3.0
 Django==3.0.6
 filelock==3.0.12
-nester==1.0.0
 Pillow==7.1.2
 pycryptodome==3.9.7
 pytz==2020.1
